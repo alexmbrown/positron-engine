@@ -1,0 +1,115 @@
+import org.gradle.internal.os.OperatingSystem
+
+group 'org.positron'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'kotlin'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+buildscript {
+
+    ext {
+        kotlin_version = '1.2.10'
+        lwjgl_version = '3.1.5'
+    }
+
+    switch ( OperatingSystem.current() ) {
+        case OperatingSystem.WINDOWS:
+            project.ext.lwjgl_natives = "natives-windows"
+            break
+        case OperatingSystem.LINUX:
+            project.ext.lwjgl_natives = "natives-linux"
+            break
+        case OperatingSystem.MAC_OS:
+            project.ext.lwjgl_natives = "natives-macos"
+            break
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "io.reactivex:rxkotlin:2.0.0-RC1"
+
+    compile "org.lwjgl:lwjgl:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-assimp:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-bgfx:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-egl:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-glfw:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-jawt:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-jemalloc:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-lmdb:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-lz4:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-nanovg:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-nfd:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-nuklear:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-odbc:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-openal:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-opencl:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-opengl:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-opengles:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-openvr:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-par:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-remotery:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-rpmalloc:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-sse:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-stb:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-tinyexr:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-tinyfd:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-tootle:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-vulkan:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-xxhash:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-yoga:$lwjgl_version"
+    compile "org.lwjgl:lwjgl-zstd:$lwjgl_version"
+    compile "org.lwjgl:lwjgl:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-assimp:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-bgfx:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-glfw:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-jemalloc:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-lmdb:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-lz4:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-nanovg:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-nfd:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-nuklear:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-openal:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-opengl:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-opengles:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-openvr:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-par:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-remotery:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-rpmalloc:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-sse:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-stb:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-tinyexr:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-tinyfd:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-tootle:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-xxhash:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-yoga:$lwjgl_version:$lwjgl_natives"
+    compile "org.lwjgl:lwjgl-zstd:$lwjgl_version:$lwjgl_natives"
+}
+
+jar {
+    from {
+        (configurations.compile).collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    manifest {
+        attributes (
+            "Main-Class": "org.positron.engine.Main"
+        )
+    }
+}

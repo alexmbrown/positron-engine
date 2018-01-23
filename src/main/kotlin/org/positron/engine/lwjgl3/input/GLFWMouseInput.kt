@@ -1,21 +1,34 @@
 package org.positron.engine.lwjgl3.input
 
 import org.lwjgl.glfw.GLFW
-import org.positron.engine.core.input.keyboard.KeyEvent
+import org.positron.engine.core.input.InputState
 import org.positron.engine.core.input.mouse.MouseButtonEvent
+import org.positron.engine.core.input.mouse.MouseCursorPosEvent
 import org.positron.engine.core.input.mouse.MouseInput
+import org.positron.engine.core.input.mouse.MouseScrollEvent
+import org.positron.engine.lwjgl3.input.GLFWInputUtils.Companion.actionToState
 
 class GLFWMouseInput(windowRef: Long): MouseInput() {
 
     private var window: Long = windowRef
+    private var prevXPos: Double = 0.0
+    private var prevYPos: Double = 0.0
 
     init {
         GLFW.glfwSetCursorPosCallback(window, {_, xPos, yPos ->
-//            println("CURSOR POS $xPos $yPos")
+            val dx = xPos - prevXPos
+            val dy = yPos - prevYPos
+            prevXPos = xPos
+            prevYPos = yPos
+            onCursorPosEvent.onNext(MouseCursorPosEvent(dx.toFloat(), dy.toFloat()))
+        })
+
+        GLFW.glfwSetCursorEnterCallback(window, {_, entered ->
+            onCursorEnterEvent.onNext(entered)
         })
 
         GLFW.glfwSetScrollCallback(window, {_, xOffset, yOffset ->
-//            println("SCROLL $xOffset $yOffset")
+            onScrollEvent.onNext(MouseScrollEvent(xOffset.toFloat(), yOffset.toFloat()))
         })
 
         GLFW.glfwSetMouseButtonCallback(window, {_, button, action, mods ->
@@ -23,12 +36,12 @@ class GLFWMouseInput(windowRef: Long): MouseInput() {
         })
     }
 
-    override fun getMouseButtonState(key: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getMouseButtonState(key: Int): InputState {
+        return actionToState(GLFW.glfwGetMouseButton(window, key))
     }
 
-    override fun setMousePosition(x: Double, y: Double) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun setMousePosition(x: Float, y: Float) {
+        GLFW.glfwSetCursorPos(window, x.toDouble(), y.toDouble())
     }
 
     override fun getMousePosition() {

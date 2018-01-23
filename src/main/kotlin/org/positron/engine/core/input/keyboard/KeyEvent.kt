@@ -1,22 +1,13 @@
 package org.positron.engine.core.input.keyboard
 
-class KeyEvent(var key: Int, var action: KeyState, var modifiers: KeyModifiers) {
+import org.positron.engine.core.input.InputModifiers
+import org.positron.engine.core.input.InputState
 
-    companion object {
-        fun onKeyDown(key: Int): (KeyEvent) -> Boolean  {
-            return { event: KeyEvent -> event.key == key && event.action === KeyState.PRESS }
-        }
 
-        fun onKeyUp(key: Int): (KeyEvent) -> Boolean  {
-            return { event: KeyEvent -> event.key == key && event.action === KeyState.RELEASE }
-        }
-
-        fun onKeyRepeat(key: Int): (KeyEvent) -> Boolean  {
-            return { event: KeyEvent -> event.key == key && event.action === KeyState.REPEAT }
-        }
-    }
+class KeyEvent(var key: Int, var state: InputState, var modifiers: InputModifiers) {
 
     override fun toString(): String {
-        return "KeyEvent(key=$key, action=$action, modifiers=$modifiers)"
+        return "KeyEvent(key=$key, state=$state, modifiers=$modifiers)"
     }
+
 }

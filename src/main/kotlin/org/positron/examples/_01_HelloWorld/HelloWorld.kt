@@ -1,7 +1,5 @@
 package org.positron.examples._01_HelloWorld
 
-import org.positron.engine.core.input.keyboard.Key
-import org.positron.engine.core.input.keyboard.KeyEvent.Companion.onKeyDown
 import org.positron.engine.core.system.Demo
 
 fun main(args: Array<String>) {
@@ -12,8 +10,7 @@ fun main(args: Array<String>) {
 class HelloWorld: Demo() {
 
     override fun init() {
-        input.key.onEvent.filter(onKeyDown(Key.A))
-            .subscribe({e -> println("TEST $e")})
+        input.mouse.onButtonEvent.subscribe({e -> println("MOUSE $e")})
     }
 
     override fun update(tpf: Float) {

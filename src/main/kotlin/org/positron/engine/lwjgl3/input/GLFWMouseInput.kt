@@ -1,6 +1,8 @@
 package org.positron.engine.lwjgl3.input
 
 import org.lwjgl.glfw.GLFW
+import org.positron.engine.core.input.keyboard.KeyEvent
+import org.positron.engine.core.input.mouse.MouseButtonEvent
 import org.positron.engine.core.input.mouse.MouseInput
 
 class GLFWMouseInput(windowRef: Long): MouseInput() {
@@ -17,7 +19,7 @@ class GLFWMouseInput(windowRef: Long): MouseInput() {
         })
 
         GLFW.glfwSetMouseButtonCallback(window, {_, button, action, mods ->
-//            println("MOUSE BUTTON $button $action $mods")
+            onButtonEvent.onNext(convertToButtonEvent(button, action, mods))
         })
     }
 
@@ -31,6 +33,10 @@ class GLFWMouseInput(windowRef: Long): MouseInput() {
 
     override fun getMousePosition() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    private fun convertToButtonEvent(button: Int, glfwKeyState: Int, glfwKeyModifiers: Int): MouseButtonEvent {
+        return MouseButtonEvent(button, GLFWInputUtils.actionToState(glfwKeyState), GLFWInputUtils.maskToModifiers(glfwKeyModifiers))
     }
 
 }

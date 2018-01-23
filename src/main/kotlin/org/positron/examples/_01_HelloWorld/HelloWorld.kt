@@ -1,6 +1,8 @@
 package org.positron.examples._01_HelloWorld
 
-import org.positron.engine.system.Demo
+import org.positron.engine.core.input.keyboard.Key
+import org.positron.engine.core.input.keyboard.KeyEvent.Companion.onKeyDown
+import org.positron.engine.core.system.Demo
 
 fun main(args: Array<String>) {
     val demo = HelloWorld()
@@ -9,15 +11,16 @@ fun main(args: Array<String>) {
 
 class HelloWorld: Demo() {
 
-    override fun onStart() {
-        println("ON START")
+    override fun init() {
+        input.key.onEvent.filter(onKeyDown(Key.A))
+            .subscribe({e -> println("TEST $e")})
     }
 
-    override fun onUpdate() {
-        println("ON UPDATE")
+    override fun update(tpf: Float) {
+
     }
 
-    override fun onClose() {
+    override fun close() {
         println("ON CLOSE")
     }
 

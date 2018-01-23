@@ -5,13 +5,13 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'kotlin'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.9
+targetCompatibility = 1.9
 
 buildscript {
 
     ext {
-        kotlin_version = '1.2.10'
+        kotlin_version = '1.2.20'
         lwjgl_version = '3.1.5'
     }
 
@@ -20,7 +20,7 @@ buildscript {
             project.ext.lwjgl_natives = "natives-windows"
             break
         case OperatingSystem.LINUX:
-            project.ext.lwjgl_natives = "natives-linux"
+            project.ext.lwjgl_natives = "n`atives-linux"
             break
         case OperatingSystem.MAC_OS:
             project.ext.lwjgl_natives = "natives-macos"
@@ -41,7 +41,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile "io.reactivex:rxkotlin:2.0.0-RC1"
 
     compile "org.lwjgl:lwjgl:$lwjgl_version"
@@ -109,7 +109,7 @@ jar {
     }
     manifest {
         attributes (
-            "Main-Class": "org.positron.engine.Main"
+            "Main-Class": "org.positron.examples._01_HelloWorld.HelloWorldKt"
         )
     }
 }

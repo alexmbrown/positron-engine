@@ -7,6 +7,6 @@ abstract class KeyboardInput {
 
     var onEvent: Subject<KeyEvent> = PublishSubject.create()
 
-    abstract fun getKeyState(key: Int)
+    abstract fun getKeyState(key: Int): KeyState
 
 }

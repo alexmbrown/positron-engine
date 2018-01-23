@@ -1,6 +1,6 @@
 package org.positron.engine.core.input.keyboard
 
-enum class KeyAction {
+enum class KeyState {
     PRESS,
     RELEASE,
     REPEAT

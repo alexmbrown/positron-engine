@@ -43,6 +43,7 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile "io.reactivex:rxkotlin:2.0.0-RC1"
+    compile "org.joml:joml:1.9.7"
 
     compile "org.lwjgl:lwjgl:$lwjgl_version"
     compile "org.lwjgl:lwjgl-assimp:$lwjgl_version"

@@ -1,10 +1,8 @@
-package org.positron.engine.lwjgl3.input
+package org.positron.engine.core.input
 
 import org.lwjgl.glfw.GLFW
-import org.positron.engine.core.input.InputModifiers
-import org.positron.engine.core.input.InputState
 
-class GLFWInputUtils {
+class InputUtils {
     companion object {
 
         fun maskToModifiers(glfwModifiers: Int): InputModifiers {

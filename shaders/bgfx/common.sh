@@ -4,4 +4,4 @@
  */
 
 #include "bgfx_shader.sh"
-#include "../bgfx/shaderlib.sh"
+#include "bgfx/shaderlib.sh"

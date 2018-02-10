@@ -9,8 +9,9 @@ class BufferUtils {
 
         fun create(value: Any): ByteBuffer {
             return when (value) {
-                is Int -> this.create(kotlin.intArrayOf(value))
+                is Int -> this.create(intArrayOf(value))
                 is IntArray -> this.create(value)
+                is Float -> this.create(floatArrayOf(value))
                 is FloatArray -> this.create(value)
                 is ShortArray -> this.create(value)
                 is Vector4f -> this.create(value)

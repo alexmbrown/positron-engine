@@ -5,6 +5,7 @@ import org.joml.Vector4f
 import org.positron.engine.core.renderer.camera.PerspectiveCamera
 import org.positron.engine.core.mesh.Mesh
 import org.positron.engine.core.mesh.material.BasicMaterial
+import org.positron.engine.core.mesh.material.WireframeMaterial
 import org.positron.engine.core.mesh.shapes.Box
 import org.positron.engine.core.system.Demo
 
@@ -19,7 +20,7 @@ class HelloWorld: Demo() {
 
     override fun onInit() {
         camera = PerspectiveCamera(75f, window.getWidth(), window.getHeight(), 0.1f, 1000f)
-        val geometry = Box(1.0f, 1.0f, 1.0f)
+        val geometry = Box(2.0f, 1.0f, 1.0f, 50, 60, 70)
         val material = BasicMaterial(Vector4f(1f, 0f, 1f, 1f))
         cube = Mesh(geometry, material)
         scene.add(cube)

@@ -1,18 +1,16 @@
 package org.positron.engine.core.mesh.material
 
+import org.joml.Vector4f
 import org.lwjgl.bgfx.BGFX
 import org.positron.engine.core.util.BufferUtils
 import java.nio.ByteBuffer
 
 class Uniform(val name: String, value: Any) {
 
-    companion object {
-        const val COLOR = "u_color"
-    }
-
     enum class UniformType(val type: Int, val num: Int) {
         INT(BGFX.BGFX_UNIFORM_TYPE_INT1, 1),
-        VEC4(BGFX.BGFX_UNIFORM_TYPE_VEC4, 4)
+        VEC4(BGFX.BGFX_UNIFORM_TYPE_INT1, 4),
+        UNKNOWN(-1, -1)
     }
 
     var type: UniformType
@@ -25,7 +23,13 @@ class Uniform(val name: String, value: Any) {
 
     init {
         valueBuffer = BufferUtils.Companion.create(value)
-        type = UniformType.INT
+
+        type = when (value) {
+            is Int -> UniformType.INT
+            is Vector4f -> UniformType.VEC4
+            else -> UniformType.UNKNOWN
+        }
+
         ref = BGFX.bgfx_create_uniform(name, type.type, type.num)
     }
 

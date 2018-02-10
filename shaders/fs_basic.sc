@@ -5,7 +5,7 @@ $input v_color0
  * License: https://github.com/bkaradzic/bgfx#license-bsd-2-clause
  */
 
-#include "../bgfx/common.sh"
+//#include "./bgfx/common.sh"
 
 void main()
 {

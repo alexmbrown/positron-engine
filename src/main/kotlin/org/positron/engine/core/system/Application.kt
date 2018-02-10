@@ -5,10 +5,6 @@ import org.joml.Matrix4f
 import org.lwjgl.glfw.GLFW
 import org.lwjgl.glfw.GLFWErrorCallback
 import org.lwjgl.opengl.GL
-import org.lwjgl.opengl.GL11
-import org.lwjgl.opengl.GLUtil
-import org.lwjgl.system.APIUtil
-import org.lwjgl.system.Callback
 import org.lwjgl.system.MemoryStack
 import org.positron.engine.core.input.InputManager
 import org.positron.engine.core.input.keyboard.KeyEvent
@@ -121,7 +117,7 @@ abstract class Application {
     }
 
     private fun update() {
-//        GL.createCapabilities()
+        GL.createCapabilities()
 //        val debugProc = GLUtil.setupDebugMessageCallback()
 //        GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f)
 

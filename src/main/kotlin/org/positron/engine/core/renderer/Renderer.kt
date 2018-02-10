@@ -13,6 +13,7 @@ import org.lwjgl.bgfx.BGFXReallocCallbackI
 import org.lwjgl.glfw.GLFWNativeCocoa
 import org.lwjgl.glfw.GLFWNativeWin32
 import org.lwjgl.glfw.GLFWNativeX11
+import org.lwjgl.opengl.GL11
 import org.lwjgl.system.APIUtil.apiLog
 import org.lwjgl.system.MemoryStack
 import org.lwjgl.system.MemoryUtil
@@ -99,13 +100,15 @@ class Renderer(val window: Long): BGFXReallocCallbackI {
 
         windowSize = settings.windowSize
         BGFX.bgfx_reset(settings.windowSize.width, settings.windowSize.height, BGFX.BGFX_RESET_VSYNC)
-        BGFX.bgfx_set_debug(BGFX.BGFX_DEBUG_STATS)
+        BGFX.bgfx_set_debug(BGFX.BGFX_DEBUG_STATS or BGFX.BGFX_DEBUG_TEXT)
+//        BGFX.bgfx_set_debug(BGFX.BGFX_DEBUG_STATS or BGFX.BGFX_DEBUG_TEXT or BGFX.BGFX_DEBUG_WIREFRAME)
         BGFX.bgfx_set_view_clear(0, (BGFX.BGFX_CLEAR_COLOR or BGFX.BGFX_CLEAR_DEPTH).toInt(), 0x303030ff, 1.0f, 0)
 
         Shaders.init()
     }
 
     fun prepareFrame(camera: Camera) {
+
         camera.view.get(viewBuffer)
         camera.projection.get(projectionBuffer)
 
@@ -138,7 +141,6 @@ class Renderer(val window: Long): BGFXReallocCallbackI {
 
         // render with program
         BGFX.bgfx_encoder_submit(encoder, 0, mesh.material.program.ref, 0, false)
-
     }
 
     fun postFrame() {

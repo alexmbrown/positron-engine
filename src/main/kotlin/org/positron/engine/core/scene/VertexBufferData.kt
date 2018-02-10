@@ -15,7 +15,9 @@ class VertexBufferData {
     enum class VertexBufferType(val attrib: Int, val type: Int, val stride: Int, val num: Int, val normalized: Boolean) {
         COLOR(BGFX.BGFX_ATTRIB_COLOR0, BGFX.BGFX_ATTRIB_TYPE_UINT8, 1, 4, true),
         POSITION(BGFX.BGFX_ATTRIB_POSITION, BGFX.BGFX_ATTRIB_TYPE_FLOAT, 3, 3, false),
-        NORMAL(BGFX.BGFX_ATTRIB_NORMAL, BGFX.BGFX_ATTRIB_TYPE_FLOAT, 3, 3, false)
+        NORMAL(BGFX.BGFX_ATTRIB_NORMAL, BGFX.BGFX_ATTRIB_TYPE_FLOAT, 3, 3, false),
+        // TODO verify num on tex coord
+        TEXTURE(BGFX.BGFX_ATTRIB_TEXCOORD0, BGFX.BGFX_ATTRIB_TYPE_FLOAT, 2, 2, false),
     }
 
     lateinit var types: Array<out VertexBufferType>
@@ -54,7 +56,7 @@ class VertexBufferData {
 
         for(type in types) {
             totalStride += type.stride
-            byteLength += type.stride * BGFXUtils.attribByteLength(type.attrib)
+            byteLength += type.stride * BGFXUtils.attribByteLength(type.type)
         }
         this.types = types
     }

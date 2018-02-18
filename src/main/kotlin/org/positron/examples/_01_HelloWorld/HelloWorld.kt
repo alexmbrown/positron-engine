@@ -4,6 +4,7 @@ import org.joml.Vector3f
 import org.joml.Vector4f
 import org.positron.engine.core.mesh.Mesh
 import org.positron.engine.core.mesh.material.BasicMaterial
+import org.positron.engine.core.mesh.shapes.Cylinder
 import org.positron.engine.core.mesh.shapes.Sphere
 import org.positron.engine.core.renderer.camera.PerspectiveCamera
 import org.positron.engine.core.system.Demo
@@ -19,7 +20,7 @@ class HelloWorld: Demo() {
 
     override fun onInit() {
         camera = PerspectiveCamera(75f, window.getWidth(), window.getHeight(), 0.1f, 1000f)
-        val geometry = Sphere(2.0f)
+        val geometry = Cylinder(2f, 1f, 3f, 20, 20)
         val material = BasicMaterial(Vector4f(1f, 0f, 1f, 1f))
         cube = Mesh(geometry, material)
         scene.add(cube)
@@ -36,7 +37,7 @@ class HelloWorld: Demo() {
     }
 
     override fun onUpdate(tpf: Float) {
-        cube.model.rotate(0.01f, 1f, 1f, 0f)
+        cube.rotate(0.01f, 0.01f, 0f)
     }
 
     override fun onClose() {

@@ -71,7 +71,7 @@ class SceneNodeIterator(root: SceneNode) {
     private fun pushSpatial(sceneNode: SceneNode) {
         var mat = Matrix4f()
         if (sceneNode is Spatial) {
-            mat = sceneNode.model
+            mat = sceneNode.getModel()
         }
         val top = model.peek()
         top.mul(mat)

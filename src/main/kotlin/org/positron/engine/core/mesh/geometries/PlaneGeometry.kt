@@ -1,11 +1,11 @@
-package org.positron.engine.core.mesh.shapes
+package org.positron.engine.core.mesh.geometries
 
 import org.positron.engine.core.mesh.Geometry
 import org.positron.engine.core.scene.IndexBuffer
 import org.positron.engine.core.scene.VertexBuffer
 import org.positron.engine.core.scene.VertexBufferData
 
-class Plane: Geometry {
+class PlaneGeometry : Geometry {
 
     constructor(width: Float, height: Float): this(width, height, 1, 1)
 

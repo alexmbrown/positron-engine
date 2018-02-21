@@ -1,4 +1,4 @@
-package org.positron.engine.core.mesh.shapes
+package org.positron.engine.core.mesh.geometries
 
 import org.positron.engine.core.mesh.Geometry
 import org.positron.engine.core.scene.IndexBuffer
@@ -6,7 +6,7 @@ import org.positron.engine.core.scene.VertexBuffer
 import org.positron.engine.core.scene.VertexBufferData
 import org.positron.engine.core.scene.VertexBufferData.VertexBufferType
 
-class Box: Geometry {
+class BoxGeometry : Geometry {
 
     private val indices = mutableListOf<Short>()
     private val vertices = mutableListOf<Float>()

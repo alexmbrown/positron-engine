@@ -3,7 +3,6 @@ package org.positron.engine.core.scene
 import org.lwjgl.bgfx.BGFX
 import org.lwjgl.bgfx.BGFXMemory
 import org.lwjgl.system.MemoryUtil
-import org.positron.engine.core.mesh.shapes.Box
 import org.positron.engine.core.util.BufferUtils
 import java.nio.ByteBuffer
 

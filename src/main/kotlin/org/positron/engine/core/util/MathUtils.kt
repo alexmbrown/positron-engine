@@ -3,8 +3,9 @@ package org.positron.engine.core.util
 class MathUtils {
     companion object {
 
-        val PI = Math.PI.toFloat()
-        val DEG2RAD = MathUtils.PI / 180f
+        const val PI = Math.PI.toFloat()
+        const val PI2 = Math.PI.toFloat() * 2f
+        const val DEG2RAD = MathUtils.PI / 180f
 
         fun floor(value: Float): Float {
             return Math.floor(value.toDouble()).toFloat()

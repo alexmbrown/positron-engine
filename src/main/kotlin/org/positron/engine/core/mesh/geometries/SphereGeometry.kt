@@ -1,4 +1,4 @@
-package org.positron.engine.core.mesh.shapes
+package org.positron.engine.core.mesh.geometries
 
 import org.joml.Vector3f
 import org.positron.engine.core.mesh.Geometry
@@ -7,7 +7,7 @@ import org.positron.engine.core.scene.VertexBuffer
 import org.positron.engine.core.scene.VertexBufferData
 import org.positron.engine.core.util.MathUtils
 
-class Sphere: Geometry {
+class SphereGeometry : Geometry {
 
     constructor(radius: Float): this(radius, 8, 6, 0f, MathUtils.PI * 2f, 0f, MathUtils.PI)
 

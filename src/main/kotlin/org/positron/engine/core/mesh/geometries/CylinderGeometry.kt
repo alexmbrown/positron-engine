@@ -1,4 +1,4 @@
-package org.positron.engine.core.mesh.shapes
+package org.positron.engine.core.mesh.geometries
 
 import org.joml.Vector3f
 import org.positron.engine.core.mesh.Geometry
@@ -7,7 +7,7 @@ import org.positron.engine.core.scene.VertexBuffer
 import org.positron.engine.core.scene.VertexBufferData
 import org.positron.engine.core.util.MathUtils
 
-class Cylinder: Geometry {
+open class CylinderGeometry : Geometry {
 
     private val indices = mutableListOf<Short>()
     private val vertices = mutableListOf<Float>()
@@ -19,7 +19,9 @@ class Cylinder: Geometry {
 
     constructor(radiusTop: Float, radiusBottom: Float, height: Float): this(radiusTop, radiusBottom, height, 8, 1, false, 0f, MathUtils.PI * 2f)
 
-    constructor(radiusTop: Float, radiusBottom: Float, height: Float, radialSegments: Int, heightSegments: Int): this(radiusTop, radiusBottom, height, radialSegments, heightSegments, false, 0f, MathUtils.PI * 2f)
+    constructor(radiusTop: Float, radiusBottom: Float, height: Float, radialSegments: Int, heightSegments: Int): this(radiusTop, radiusBottom, height, radialSegments, heightSegments, false, 0f, MathUtils.PI2)
+
+    constructor(radiusTop: Float, radiusBottom: Float, height: Float, radialSegments: Int, heightSegments: Int, openEnded: Boolean): this(radiusTop, radiusBottom, height, radialSegments, heightSegments, openEnded, 0f, MathUtils.PI2)
 
     constructor(radiusTop: Float, radiusBottom: Float, height: Float, radialSegments: Int, heightSegments: Int, openEnded: Boolean, thetaStart: Float, thetaLength: Float) {
         // generate geometry

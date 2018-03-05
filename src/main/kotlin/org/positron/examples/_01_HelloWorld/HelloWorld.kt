@@ -24,7 +24,7 @@ class HelloWorld: Demo() {
         camera = PerspectiveCamera(75f, window.getWidth(), window.getHeight(), 0.1f, 1000f)
         val geometry = SphereGeometry(2f, 100, 100, 0f, MathUtils.PI2, 0f, MathUtils.PI2)
         val color = Color.BLUE
-        color.a = 0.5f
+        color.a = 0.1f
         val material = BasicMaterial(color)
         cube = Mesh(geometry, material)
         scene.add(DirectionalLight(Color.GREEN))

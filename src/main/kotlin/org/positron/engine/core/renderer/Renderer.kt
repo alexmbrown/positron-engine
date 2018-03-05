@@ -13,7 +13,6 @@ import org.lwjgl.bgfx.BGFXReallocCallbackI
 import org.lwjgl.glfw.GLFWNativeCocoa
 import org.lwjgl.glfw.GLFWNativeWin32
 import org.lwjgl.glfw.GLFWNativeX11
-import org.lwjgl.opengl.GL11
 import org.lwjgl.system.APIUtil.apiLog
 import org.lwjgl.system.MemoryStack
 import org.lwjgl.system.MemoryUtil
@@ -23,7 +22,6 @@ import org.lwjgl.system.MemoryUtil.memUTF8
 import org.lwjgl.system.Platform
 import org.positron.engine.core.mesh.Mesh
 import org.positron.engine.core.renderer.camera.Camera
-import org.positron.engine.core.scene.VertexBuffer
 import org.positron.engine.core.shader.Shaders
 import org.positron.engine.core.system.AppSettings
 import org.positron.engine.core.window.WindowSize
@@ -137,7 +135,12 @@ class Renderer(val window: Long): BGFXReallocCallbackI {
         BGFX.bgfx_encoder_set_vertex_buffer(encoder, 0, geometry.vertexBuffer?.ref!!, 0, geometry.vertexBuffer?.vertCount!!)
         BGFX.bgfx_encoder_set_index_buffer(encoder, geometry.indexBuffer?.ref!!, 0, geometry.indexBuffer?.faceCount!! * 3)
 
-        BGFX.bgfx_encoder_set_state(encoder, BGFX.BGFX_STATE_DEFAULT, 0)
+        BGFX.bgfx_encoder_set_state(encoder,
+            BGFX.BGFX_STATE_RGB_WRITE or
+            BGFX.BGFX_STATE_ALPHA_WRITE or
+            BGFX.BGFX_STATE_MSAA or
+            BGFX.BGFX_STATE_BLEND_FUNC(BGFX.BGFX_STATE_BLEND_SRC_ALPHA, BGFX.BGFX_STATE_BLEND_INV_SRC_ALPHA),
+        0)
 
         // render with program
         BGFX.bgfx_encoder_submit(encoder, 0, mesh.material.program.ref, 0, false)

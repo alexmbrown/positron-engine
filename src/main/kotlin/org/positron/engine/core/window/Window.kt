@@ -2,12 +2,9 @@ package org.positron.engine.core.window
 
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import org.joml.Vector2f
 import org.joml.Vector2i
 import org.joml.Vector4i
-import org.lwjgl.glfw.Callbacks
 import org.lwjgl.glfw.GLFW
-import org.lwjgl.opengl.GL11
 import org.lwjgl.system.MemoryStack
 import org.lwjgl.system.MemoryUtil
 import org.positron.engine.core.system.AppSettings

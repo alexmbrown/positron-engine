@@ -1,5 +1,6 @@
 package org.positron.engine.core.util
 
+import org.joml.Vector3f
 import org.joml.Vector4f
 import org.lwjgl.system.MemoryUtil
 import java.nio.ByteBuffer
@@ -14,6 +15,7 @@ class BufferUtils {
                 is Float -> this.create(floatArrayOf(value))
                 is FloatArray -> this.create(value)
                 is ShortArray -> this.create(value)
+                is Vector3f -> this.create(value)
                 is Vector4f -> this.create(value)
                 else -> throw IllegalArgumentException("Unknown value type of ${value.javaClass.name}")
             }
@@ -45,6 +47,15 @@ class BufferUtils {
             for (element in array) {
                 buffer.putShort(element)
             }
+            buffer.flip()
+            return buffer
+        }
+
+        fun create(vec3: Vector3f): ByteBuffer {
+            val buffer: ByteBuffer = MemoryUtil.memAlloc(3 * FLOAT_SIZE)
+            buffer.putFloat(vec3.x)
+            buffer.putFloat(vec3.y)
+            buffer.putFloat(vec3.z)
             buffer.flip()
             return buffer
         }

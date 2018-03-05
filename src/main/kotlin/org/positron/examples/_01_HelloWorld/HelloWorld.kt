@@ -2,11 +2,14 @@ package org.positron.examples._01_HelloWorld
 
 import org.joml.Vector3f
 import org.joml.Vector4f
+import org.positron.engine.core.graphics.Color
 import org.positron.engine.core.mesh.Mesh
-import org.positron.engine.core.mesh.geometries.ConeGeometry
+import org.positron.engine.core.mesh.geometries.SphereGeometry
 import org.positron.engine.core.mesh.material.BasicMaterial
 import org.positron.engine.core.renderer.camera.PerspectiveCamera
+import org.positron.engine.core.scene.light.DirectionalLight
 import org.positron.engine.core.system.Demo
+import org.positron.engine.core.util.MathUtils
 
 fun main(args: Array<String>) {
     val demo = HelloWorld()
@@ -19,9 +22,12 @@ class HelloWorld: Demo() {
 
     override fun onInit() {
         camera = PerspectiveCamera(75f, window.getWidth(), window.getHeight(), 0.1f, 1000f)
-        val geometry = ConeGeometry(2f, 1f, 20, 20)
-        val material = BasicMaterial(Vector4f(1f, 0f, 1f, 1f))
+        val geometry = SphereGeometry(2f, 100, 100, 0f, MathUtils.PI2, 0f, MathUtils.PI2)
+        val color = Color.BLUE
+        color.a = 0.5f
+        val material = BasicMaterial(color)
         cube = Mesh(geometry, material)
+        scene.add(DirectionalLight(Color.GREEN))
         scene.add(cube)
 
         camera?.view?.lookAtLH(

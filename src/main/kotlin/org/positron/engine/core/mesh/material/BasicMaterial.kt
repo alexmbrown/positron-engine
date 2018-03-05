@@ -1,16 +1,16 @@
 package org.positron.engine.core.mesh.material
 
-import org.joml.Vector4f
+import org.positron.engine.core.graphics.Color
 import org.positron.engine.core.shader.Shaders
 import java.util.*
 
-class BasicMaterial(color: Vector4f): Material(
-    Shaders.BASIC,
+class BasicMaterial(color: Color): Material(
+    Shaders.MESH_BASIC,
     Arrays.asList(
-        Uniform(BasicMaterial.COLOR, color)
+        Uniform(BasicMaterial.COLOR, color.toVec4f())
     )
 ) {
     companion object {
-        const val COLOR = "u_color"
+        const val COLOR   = "diffuse"
     }
 }

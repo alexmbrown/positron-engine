@@ -8,7 +8,6 @@ open class Spatial(parent: SceneNode?): SceneNode(parent) {
 
     private val model = Matrix4f()
 
-
     private val rotation = Quaternionf()
     private val translation = Vector3f()
     private val scale = Vector3f(1f)

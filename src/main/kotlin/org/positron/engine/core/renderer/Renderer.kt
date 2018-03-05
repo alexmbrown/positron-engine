@@ -100,8 +100,8 @@ class Renderer(val window: Long): BGFXReallocCallbackI {
 
         windowSize = settings.windowSize
         BGFX.bgfx_reset(settings.windowSize.width, settings.windowSize.height, BGFX.BGFX_RESET_VSYNC)
-//        BGFX.bgfx_set_debug(BGFX.BGFX_DEBUG_STATS or BGFX.BGFX_DEBUG_TEXT)
-        BGFX.bgfx_set_debug(BGFX.BGFX_DEBUG_STATS or BGFX.BGFX_DEBUG_TEXT or BGFX.BGFX_DEBUG_WIREFRAME)
+        BGFX.bgfx_set_debug(BGFX.BGFX_DEBUG_STATS or BGFX.BGFX_DEBUG_TEXT)
+//        BGFX.bgfx_set_debug(BGFX.BGFX_DEBUG_STATS or BGFX.BGFX_DEBUG_TEXT or BGFX.BGFX_DEBUG_WIREFRAME)
         BGFX.bgfx_set_view_clear(0, (BGFX.BGFX_CLEAR_COLOR or BGFX.BGFX_CLEAR_DEPTH).toInt(), 0x303030ff, 1.0f, 0)
 
         Shaders.init()

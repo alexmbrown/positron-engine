@@ -5,22 +5,22 @@ import org.positron.engine.core.util.ResourceUtils
 class Shaders {
     companion object {
 
-        lateinit var BASIC: ShaderProgram
-        lateinit var WIREFRAME: ShaderProgram
+        lateinit var MESH_BASIC: ShaderProgram
+//        lateinit var PHONG: ShaderProgram
 
         fun init() {
-            BASIC = ShaderProgram(
-                Shader(ShaderType.VERTEX, ResourceUtils.load("/shaders", "vs_basic.bin")),
-                Shader(ShaderType.FRAGMENT, ResourceUtils.load("/shaders", "fs_basic.bin"))
+            MESH_BASIC = ShaderProgram(
+                Shader(ShaderType.VERTEX, ResourceUtils.load("/shaders/mesh_basic", "vs_mesh_basic.bin")),
+                Shader(ShaderType.FRAGMENT, ResourceUtils.load("/shaders/mesh_basic", "fs_mesh_basic.bin"))
             )
-            WIREFRAME = ShaderProgram(
-                Shader(ShaderType.VERTEX, ResourceUtils.load("/shaders", "vs_wireframe.bin")),
-                Shader(ShaderType.FRAGMENT, ResourceUtils.load("/shaders", "fs_wireframe.bin"))
-            )
+//            PHONG = ShaderProgram(
+//                Shader(ShaderType.VERTEX, ResourceUtils.load("/shaders", "vs_phong.bin")),
+//                Shader(ShaderType.FRAGMENT, ResourceUtils.load("/shaders", "fs_phong.bin"))
+//            )
         }
 
         fun destroy() {
-            BASIC.destroy()
+            MESH_BASIC.destroy()
         }
 
     }
